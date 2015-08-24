@@ -108,11 +108,6 @@ var Calendar = React.createClass({displayName: "Calendar",
 
     inputBlur: function (e) {
 
-        // if we opened the calendar on focus, we should hide it on blur
-        if ( this.props.openOnInputFocus ) {
-            this.toggleClick();
-        }
-
         var date = this.state.inputValue,
             newDate = null,
             computableDate = null,
@@ -150,6 +145,7 @@ var Calendar = React.createClass({displayName: "Calendar",
         if (this.props.onBlur) {
             this.props.onBlur(e, computableDate);
         }
+
     },
 
     //small hack for hide calendar
@@ -189,7 +185,6 @@ var Calendar = React.createClass({displayName: "Calendar",
         var value = val !== undefined ? val : !this.state.isVisible;
         var eventMethod = value ? 'addEventListener' : 'removeEventListener';
         document[eventMethod]('keydown', this.keyDown);
-
         this.setState({
             isVisible: value
         });
