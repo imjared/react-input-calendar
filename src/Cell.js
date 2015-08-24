@@ -1,7 +1,7 @@
 var React = require('react');
 var moment = require('moment-range');
 
-module.exports = React.createClass({
+var Cell = React.createClass({
 
     propTypes: {
         value: React.PropTypes.string,
@@ -18,3 +18,5 @@ module.exports = React.createClass({
     }
 
 });
+
+module.exports = Cell;

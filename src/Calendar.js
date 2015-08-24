@@ -8,7 +8,7 @@ var Utils = require('./Utils');
 
 var _keyDownActions = Utils.keyDownActions;
 
-module.exports = React.createClass({
+var Calendar = React.createClass({
 
     propTypes: {
         closeOnSelect: React.PropTypes.bool,
@@ -246,3 +246,5 @@ module.exports = React.createClass({
     }
 
 });
+
+module.exports = Calendar;
