@@ -1,6 +1,6 @@
 var React = require('react');
 
-module.exports = React.createClass({displayName: "exports",
+var ViewHeader = React.createClass({displayName: "ViewHeader",
 
     propTypes: {
         next: React.PropTypes.func,
@@ -22,3 +22,5 @@ module.exports = React.createClass({displayName: "exports",
     }
 
 });
+
+module.exports = ViewHeader;

@@ -8,12 +8,12 @@ var Utils = require('./Utils');
 
 var _keyDownActions = Utils.keyDownActions;
 
-module.exports = React.createClass({displayName: "exports",
+var Calendar = React.createClass({displayName: "Calendar",
 
     propTypes: {
         closeOnSelect: React.PropTypes.bool,
         computableFormat: React.PropTypes.string,
-        date: React.PropTypes.any,
+        date: React.PropTypes.string, // date string in format MM-DD-YYYY
         format: React.PropTypes.string,
         minView: React.PropTypes.number,
         onBlur: React.PropTypes.func,
@@ -22,7 +22,7 @@ module.exports = React.createClass({displayName: "exports",
     },
 
     getInitialState: function() {
-        var date = this.props.date ? moment(this.props.date) : null,
+        var date = this.props.date ? moment( this.props.date, 'MM-DD-YYYY') : null,
             format = this.props.format || 'MM-DD-YYYY',
             minView = parseInt(this.props.minView, 10) || 0,
             computableFormat = this.props.computableFormat || 'MM-DD-YYYY';
@@ -52,6 +52,10 @@ module.exports = React.createClass({displayName: "exports",
             date: nextProps.date ? moment(nextProps.date) : this.state.date,
             inputValue: nextProps.date ? moment(nextProps.date).format(this.state.format) : null
         });
+    },
+
+    getValue: function() {
+        return this.state.inputValue;
     },
 
     keyDown: function (e) {
@@ -103,6 +107,12 @@ module.exports = React.createClass({displayName: "exports",
     },
 
     inputBlur: function (e) {
+
+        // if we opened the calendar on focus, we should hide it on blur
+        if ( this.props.openOnInputFocus ) {
+            this.toggleClick();
+        }
+
         var date = this.state.inputValue,
             newDate = null,
             computableDate = null,
@@ -230,12 +240,12 @@ module.exports = React.createClass({displayName: "exports",
             React.createElement("div", {className: "input-calendar"}, 
                 React.createElement("input", {type: "text", 
                     className: "input-calendar-value", 
-                    value: this.state.inputValue, 
-                    onBlur: this.inputBlur, 
-                    onChange: this.changeDate, 
-                    onClick: this.props.openOnInputFocus ? this.toggleClick : '', 
-                    onFocus: this.props.openOnInputFocus ? this.toggleClick : '', 
-                    placeholder: this.props.placeholder}), 
+                    value:  this.state.inputValue, 
+                    onBlur:  this.inputBlur, 
+                    onChange:  this.changeDate, 
+                    onFocus:  this.props.openOnInputFocus ? this.toggleClick : '', 
+                    placeholder:  this.props.placeholder}
+                ), 
 
                 React.createElement("span", {onClick: this.toggleClick, className: "icon-wrapper calendar-icon"}, 
                     React.createElement("i", {className: iconClass})
@@ -246,3 +256,5 @@ module.exports = React.createClass({displayName: "exports",
     }
 
 });
+
+module.exports = Calendar;

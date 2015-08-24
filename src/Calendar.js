@@ -13,7 +13,7 @@ var Calendar = React.createClass({
     propTypes: {
         closeOnSelect: React.PropTypes.bool,
         computableFormat: React.PropTypes.string,
-        date: React.PropTypes.any,
+        date: React.PropTypes.string, // date string in format MM-DD-YYYY
         format: React.PropTypes.string,
         minView: React.PropTypes.number,
         onBlur: React.PropTypes.func,
@@ -22,7 +22,7 @@ var Calendar = React.createClass({
     },
 
     getInitialState: function() {
-        var date = this.props.date ? moment(this.props.date) : null,
+        var date = this.props.date ? moment( this.props.date, 'MM-DD-YYYY') : null,
             format = this.props.format || 'MM-DD-YYYY',
             minView = parseInt(this.props.minView, 10) || 0,
             computableFormat = this.props.computableFormat || 'MM-DD-YYYY';
@@ -52,6 +52,10 @@ var Calendar = React.createClass({
             date: nextProps.date ? moment(nextProps.date) : this.state.date,
             inputValue: nextProps.date ? moment(nextProps.date).format(this.state.format) : null
         });
+    },
+
+    getValue: function() {
+        return this.state.inputValue;
     },
 
     keyDown: function (e) {
@@ -103,6 +107,12 @@ var Calendar = React.createClass({
     },
 
     inputBlur: function (e) {
+
+        // if we opened the calendar on focus, we should hide it on blur
+        if ( this.props.openOnInputFocus ) {
+            this.toggleClick();
+        }
+
         var date = this.state.inputValue,
             newDate = null,
             computableDate = null,
@@ -230,12 +240,12 @@ var Calendar = React.createClass({
             <div className="input-calendar">
                 <input type="text"
                     className="input-calendar-value"
-                    value={this.state.inputValue}
-                    onBlur={this.inputBlur}
-                    onChange={this.changeDate}
-                    onClick={this.props.openOnInputFocus ? this.toggleClick : ''}
-                    onFocus={this.props.openOnInputFocus ? this.toggleClick : ''}
-                    placeholder={this.props.placeholder} />
+                    value={ this.state.inputValue }
+                    onBlur={ this.inputBlur }
+                    onChange={ this.changeDate }
+                    onFocus={ this.props.openOnInputFocus ? this.toggleClick : '' }
+                    placeholder={ this.props.placeholder }
+                />
 
                 <span onClick={this.toggleClick} className="icon-wrapper calendar-icon">
                     <i className={iconClass}></i>

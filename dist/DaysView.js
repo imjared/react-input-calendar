@@ -4,7 +4,7 @@ var moment = require('moment-range');
 var Cell = require('./Cell');
 var ViewHeader = require('./ViewHeader');
 
-module.exports = React.createClass({displayName: "exports",
+var DaysView = React.createClass({displayName: "DaysView",
 
     propTypes: {
         date: React.PropTypes.object.isRequired,
@@ -107,3 +107,5 @@ module.exports = React.createClass({displayName: "exports",
     }
 
 });
+
+module.exports = DaysView;
