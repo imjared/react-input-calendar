@@ -9,11 +9,11 @@ var Cell = React.createClass({
     },
 
     render: function () {
-        var prop = this.props;
-        prop.classes += ' cell';
+
+        var cssClasses = this.props.classes + ' cell';
 
         return (
-            <div className={prop.classes}>{prop.value}</div>
+            <div className={ cssClasses }>{ this.props.value }</div>
         );
     }
 
