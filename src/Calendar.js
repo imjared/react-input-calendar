@@ -22,8 +22,8 @@ var Calendar = React.createClass({
     },
 
     getInitialState: function() {
-        var date = this.props.date ? moment( this.props.date, 'MM-DD-YYYY') : null,
-            format = this.props.format || 'MM-DD-YYYY',
+        var format = this.props.format || 'MM-DD-YYYY',
+            date = this.props.date ? moment( this.props.date, format) : null,            
             minView = parseInt(this.props.minView, 10) || 0,
             computableFormat = this.props.computableFormat || 'MM-DD-YYYY';
 

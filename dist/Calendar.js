@@ -22,8 +22,8 @@ var Calendar = React.createClass({displayName: "Calendar",
     },
 
     getInitialState: function() {
-        var date = this.props.date ? moment( this.props.date, 'MM-DD-YYYY') : null,
-            format = this.props.format || 'MM-DD-YYYY',
+        var format = this.props.format || 'MM-DD-YYYY',
+            date = this.props.date ? moment( this.props.date, format) : null,
             minView = parseInt(this.props.minView, 10) || 0,
             computableFormat = this.props.computableFormat || 'MM-DD-YYYY';
 
@@ -201,27 +201,27 @@ var Calendar = React.createClass({displayName: "Calendar",
         switch (this.state.currentView) {
             case 0:
                 view = React.createElement(DaysView, {
-                    date: calendarDate, 
-                    setDate: this.setDate, 
+                    date: calendarDate,
+                    setDate: this.setDate,
                     nextView: this.nextView});
                 break;
             case 1:
                 view = React.createElement(MonthsView, {
-                    date: calendarDate, 
-                    setDate: this.setDate, 
-                    nextView: this.nextView, 
+                    date: calendarDate,
+                    setDate: this.setDate,
+                    nextView: this.nextView,
                     prevView: this.prevView});
                 break;
             case 2:
                 view = React.createElement(YearsView, {
-                    date: calendarDate, 
-                    setDate: this.setDate, 
+                    date: calendarDate,
+                    setDate: this.setDate,
                     prevView: this.prevView});
                 break;
         }
 
         var calendar = !this.state.isVisible ? '' :
-            React.createElement("div", {className: "input-calendar-wrapper", onClick: this.calendarClick}, 
+            React.createElement("div", {className: "input-calendar-wrapper", onClick: this.calendarClick},
                 view, React.createElement("span", {className: "today-btn", onClick: this.todayClick}, "Today")
             );
 
@@ -232,19 +232,19 @@ var Calendar = React.createClass({displayName: "Calendar",
         });
 
         return (
-            React.createElement("div", {className: "input-calendar"}, 
-                React.createElement("input", {type: "text", 
-                    className: "input-calendar-value", 
-                    value:  this.state.inputValue, 
-                    onBlur:  this.inputBlur, 
-                    onChange:  this.changeDate, 
-                    onFocus:  this.props.openOnInputFocus ? this.toggleClick : '', 
+            React.createElement("div", {className: "input-calendar"},
+                React.createElement("input", {type: "text",
+                    className: "input-calendar-value",
+                    value:  this.state.inputValue,
+                    onBlur:  this.inputBlur,
+                    onChange:  this.changeDate,
+                    onFocus:  this.props.openOnInputFocus ? this.toggleClick : '',
                     placeholder:  this.props.placeholder}
-                ), 
+                ),
 
-                React.createElement("span", {onClick: this.toggleClick, className: "icon-wrapper calendar-icon"}, 
+                React.createElement("span", {onClick: this.toggleClick, className: "icon-wrapper calendar-icon"},
                     React.createElement("i", {className: iconClass})
-                ), 
+                ),
                 calendar
             )
         );
