@@ -4,39 +4,7 @@ React component for calendar widget.
 
 ## Installation
 
-React Input Calendar is available as an [npm package](https://www.npmjs.org/package/react-input-calendar).
-```sh
-npm install react-input-calendar
-```
-
-Use [browserify](http://browserify.org/) and [reactify](https://github.com/andreypopp/reactify) for dependency management and JSX transformation.
-
-All styles written in CSS and are in file input-component.css.
-
-## Demo
-
-http://rudeg.github.io/react-input-calendar
-
-## Usage
-
-```javascript
-var Calendar = require('react-input-calendar');
-React.render(
-  <Calendar
-    format="DD/MM/YYYY"
-    date="4-12-2014"
-  />,
-  document.body
-);
-```
-
-## Dependencies
-
-[React](http://facebook.github.io/react/)
-
-[Moment-range](https://github.com/gf3/moment-range)
-
-[Font-Awesome](http://fortawesome.github.io/Font-Awesome/)
+A [Patronage](http://patronage.org) fork of [react-input-calendar](https://github.com/Rudeg/react-input-calendar)
 
 
 ## API
