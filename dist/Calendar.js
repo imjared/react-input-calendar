@@ -23,7 +23,7 @@ var Calendar = React.createClass({displayName: "Calendar",
 
     getInitialState: function() {
         var format = this.props.format || 'MM-DD-YYYY',
-            date = this.props.date ? moment( this.props.date, format) : null,
+            date = this.props.date ? moment( this.props.date, format ) : null,
             minView = parseInt(this.props.minView, 10) || 0,
             computableFormat = this.props.computableFormat || 'MM-DD-YYYY';
 
@@ -48,9 +48,11 @@ var Calendar = React.createClass({displayName: "Calendar",
     },
 
     componentWillReceiveProps: function(nextProps) {
+        var format = this.props.format || 'MM-DD-YYYY';
+
         this.setState({
-            date: nextProps.date ? moment(nextProps.date) : this.state.date,
-            inputValue: nextProps.date ? moment(nextProps.date).format(this.state.format) : null
+            date: nextProps.date ? moment(nextProps.date, format) : this.state.date,
+            inputValue: nextProps.date ? moment(nextProps.date, format).format(this.state.format) : null
         });
     },
 
@@ -103,10 +105,11 @@ var Calendar = React.createClass({displayName: "Calendar",
     changeDate: function (e) {
         this.setState({
             inputValue: e.target.value
-        })
+        });
     },
 
     inputBlur: function (e) {
+        var format = this.props.format || 'MM-DD-YYYY';
 
         var date = this.state.inputValue,
             newDate = null,
@@ -127,7 +130,7 @@ var Calendar = React.createClass({displayName: "Calendar",
                     d = new Date();
                 }
 
-                newDate = moment(d);
+                newDate = moment( d, format );
             }
 
             computableDate = newDate.format(this.state.computableFormat);
